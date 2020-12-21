@@ -1,9 +1,16 @@
-//practice the recursive  template
+/*
+ * @lc app=leetcode id=70 lang=csharp
+ *
+ * [70] Climbing Stairs
+ */
+
+// @lc code=start
 public class Solution
 {
     public int ClimbStairs(int n)
     {
         var temp = new Dictionary<int, int>(n);
+        temp[0] = 0;
         temp[1] = 1;
         temp[2] = 2;
         return _ClimbStairs(n, temp);
@@ -21,21 +28,5 @@ public class Solution
         return temp[n];
     }
 }
-// @lc code
-public class Solution
-{
+// @lc code=end
 
-    public int ClimbStairs(int n)
-    {
-        if (n < 3) return n;
-        var first = 1;
-        var second = 2;
-        for (int i = 3; i <= n; i++)
-        {
-            var third = first + second;
-            first = second;
-            second = third;
-        }
-        return second;
-    }
-}

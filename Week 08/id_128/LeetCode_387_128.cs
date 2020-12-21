@@ -22,3 +22,25 @@ public class Solution
         return -1;
     }
 }
+
+public class Solution
+{
+    public int FirstUniqChar(string s)
+    {
+        if (string.IsNullOrEmpty(s)) return -1;
+
+        var bucket = new int[26];
+        foreach (var c in s)
+        {
+            bucket[c - 'a']++;
+        }
+
+        for (int i = 0; i < s.Length; i++)
+        {
+            if (bucket[s[i] - 'a'] == 1)
+                return i;
+        }
+        return -1;
+
+    }
+}

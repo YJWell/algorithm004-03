@@ -1,6 +1,79 @@
 # NOTE
 
 
+preorder inorder postorder traversal template
+Pay attention to where stack.Pop() is called and node is visited
+public class Solution {
+    public IList<int> PreorderTraversal(TreeNode root) {
+        var result = new List<int>();
+        var stack = new Stack<TreeNode>();
+        TreeNode pre = null;
+        while (stack.Any() || root != null) {
+            if (root != null) {
+                result.Add(root.val); //pre-order visit before push left child (when parent != null)
+                stack.Push(root);
+                root = root.left;
+            } else {
+                root = stack.Peek();
+                if (root.right != null && root.right != pre) {
+                   root = root.right;
+                } else {
+                    stack.Pop(); 
+                    pre = root;
+                    root = null;
+                }
+            }
+        }
+        return result;
+    }
+    public IList<int> InorderTraversal(TreeNode root) {
+        var result = new List<int>();
+        var stack = new Stack<TreeNode>();
+        TreeNode pre = null;
+        while (stack.Any() || root != null) {
+            if (root != null) {
+                stack.Push(root);
+                root = root.left;
+            } else {
+                root = stack.Peek();
+                result.Add(root.val); //in-order visit when left child is null
+                stack.Pop()
+                if (root.right != null && root.right != pre) {
+                   root = root.right;
+                } else {
+                    pre = root;
+                    root = null;
+                }
+            }
+        }
+        return result;
+    }
+    public IList<int> PostorderTraversal(TreeNode root) {
+        var result = new List<int>();
+        var stack = new Stack<TreeNode>();
+        TreeNode pre = null;
+        while (stack.Any() || root != null) {
+            if (root != null) {
+                stack.Push(root);
+                root = root.left;
+            } else {
+                root = stack.Peek();
+                if (root.right != null && root.right != pre) {
+                   root = root.right;
+                } else {
+                    result.Add(root.val); //post-order visit when both children are null (left child is null because it is in first Else block, and right child is null in here obviously)
+                    stack.Pop();
+                    pre = root;
+                    root = null;
+                }
+            }
+        }
+        return result;
+    }
+}
+
+
+
 重新学习了斐波那契数列 （爬楼梯） 问题
 
 top down 递归with memo 最易想到
